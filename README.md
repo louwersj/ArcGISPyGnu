@@ -4,7 +4,8 @@ ArcGISPyGnu is a Python library for interacting with ArcGIS REST APIs.
 
 
 When trying to test the functionality of this Python library without having direct access to a test environment you could
-use https://sampleserver6.arcgisonline.com/arcgis/rest 
+use https://sampleserver6.arcgisonline.com/arcgis/rest
+
 ---
 
 ## Installation
