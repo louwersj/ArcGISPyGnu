@@ -26,6 +26,7 @@ pip install ArcGISPyGnu
 4. [getFolders](#getFolders)
 5. [restGetServices](#restgetServices)
 4. [getServices](#getServices)
+5. [restGetServiceByType](#restGetServiceByType)
 ---
 ### restGetVersion
 Fetches the version information from an ArcGIS REST API endpoint.
@@ -145,6 +146,9 @@ else:
 ### restGetServiceByType
 
 Fetches a list of service names from an ArcGIS REST API endpoint filtered by the specified service type.
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* getServiceByType
 #### Parameters
 * baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment. The checkBaseUrl function from utils.py is used to validate and standardize this URL.
 * serviceType (str): The type of services to filter by (e.g., "MapServer", "FeatureServer"). This parameter must be a string.
