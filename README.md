@@ -29,6 +29,10 @@ pip install ArcGISPyGnu
 ---
 ### restGetVersion
 Fetches the version information from an ArcGIS REST API endpoint.
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* getVersion
+
 #### parameters 
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 #### Returns
@@ -41,13 +45,8 @@ version = restGetVersion("http://example.com/arcgis/rest/")
 print(version)  # Output: 10.91 (or a similar version number)
 ```
 ---
-### getVersion
-A synonym for restGetVersion.
 
-In ArcGISPyGnu, synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
-
----
-###restGetFolders
+### restGetFolders
 Fetches the list of folders from an ArcGIS REST API endpoint. Folders in the ArcGIS REST API are essential for 
 organizing and managing GIS resources. They help users categorize various services, maps, and data, facilitating easier 
 navigation and maintenance. By grouping related resources, folders not only streamline the user experience but also aid 
@@ -56,24 +55,23 @@ well-structured folder system enhances the efficiency of managing large datasets
 updates and deployments. Overall, folders play a crucial role in maintaining an organized, secure, and user-friendly 
 environment within the ArcGIS ecosystem.
 
-####Parameters
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* getServices
+
+#### Parameters
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
-####Returns
+#### Returns
 list: A list of folder names from the ArcGIS REST API or a message indicating the folders are not available.
-####Raises
+#### Raises
 SystemExit: If the URL is not valid or contains a query string or fragment.
-####Example
+#### Example
 ```python
 folders = restGetFolders("http://example.com/arcgis/rest/")
 print(folders)  # Output: ["AAA", "BBB", "CCC", "DDD"]
 ````
 ---
-###getFolders
-A synonym for restGetFolders.
 
-In ArcGISPyGnu, synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
-
----
 ### restGetServices
 Fetches the list of services from an ArcGIS REST API endpoint.
 In the ArcGIS REST API, service types are categorized to facilitate different types of geographic and spatial operations, each designed to meet specific business needs and applications. These service types include Map Services, Feature Services, Image Services, Geocode Services, and Network Analysis Services, among others.
@@ -90,8 +88,11 @@ Network Analysis Services are used for tasks related to transportation networks,
 
 Each service type within the ArcGIS REST API is designed to handle specific aspects of spatial data and operations, allowing businesses to tailor their GIS solutions to meet particular needs, whether for mapping, data management, imagery analysis, geocoding, or network optimization.
 
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* getServices
 
-####Parameters
+#### Parameters
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 ####Returns
 list: A list of dictionaries, each containing information about a service. Each dictionary has the following keys:
@@ -112,7 +113,7 @@ list: A list of dictionaries, each containing information about a service. Each 
 ]
 
 ```
-###Examples
+#### Examples
 Printing Service Names
 ```python
 services = getServices("http://example.com/arcgis/rest/")
@@ -141,25 +142,18 @@ else:
 ```
 ---
 
-### getServices
-A synonym for restGetServices.
-
-In ArcGISPyGnu, synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
-
----
-
 ### restGetServiceByType
 
 Fetches a list of service names from an ArcGIS REST API endpoint filtered by the specified service type.
-####Parameters
+#### Parameters
 * baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment. The checkBaseUrl function from utils.py is used to validate and standardize this URL.
 * serviceType (str): The type of services to filter by (e.g., "MapServer", "FeatureServer"). This parameter must be a string.
-####Returns
+#### Returns
 list: A list of service names that match the specified service type. Each item in the list is a string representing a service name. If no services match, an empty list is returned. Those service can be; Map Services, Feature Services, Image Services, Geocode Services or Network Analysis Services.  
-####Errors
+#### Errors
 * Invalid serviceType: If the serviceType parameter is not a string, the function will print an error message and exit.
 * Invalid baseUrl: If the baseUrl is invalid, the function will print an error message and exit.
-####Examples
+#### Examples
 Fetching Services by Type  - fetch all services of type `MapServer`:
 ```Python
 services = restGetServiceByType("http://example.com/arcgis/rest/services", "MapServer")

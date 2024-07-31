@@ -26,14 +26,7 @@ def restGetVersion(baseUrl):
 # Synonym function for restGetVersion
 def getVersion(baseUrl):
     """
-    Fetches the version information from an ArcGIS REST API endpoint.
-    This is a synonym for restGetVersion.
-
-    Args:
-        baseUrl (str): The base URL of the ArcGIS REST API.
-
-    Returns:
-        str: The version information.
+    synonym for restGetVersion
     """
     return restGetVersion(baseUrl)
 
@@ -62,14 +55,7 @@ def restGetFolders(baseUrl):
 
 def getFolders(baseUrl):
     """
-    Fetches the list of folders from an ArcGIS REST API endpoint.
-    This is a synonym for restGetFolders.
-
-    Args:
-        baseUrl (str): The base URL of the ArcGIS REST API.
-
-    Returns:
-        list: A list of folder names, or a message indicating the folders are not available.
+    synonym for restGetFolders
     """
     return restGetFolders(baseUrl)
 
@@ -98,14 +84,7 @@ def restGetServices(baseUrl):
 
 def getServices(baseUrl):
     """
-    Fetches the list of services from an ArcGIS REST API endpoint.
-    This is a synonym for restGetServices.
-
-    Args:
-        baseUrl (str): The base URL of the ArcGIS REST API.
-
-    Returns:
-        list: A list of service names, or a message indicating the services are not available.
+    synonym for restGetServices
     """
     return restGetServices(baseUrl)
 
@@ -135,14 +114,7 @@ def restGetServiceTypes(baseUrl: str) -> list:
 
 def getServiceTypes(baseUrl):
     """
-    Fetches a distinct list of all service types from an ArcGIS REST API endpoint.
-    This is a synonym for restGetServiceTypes.
-
-    Args:
-        baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
-
-    Returns:
-        list: A distinct list of service types found in the API response. If no types are found, an empty list is returned.
+    synonym for restGetServiceTypes
     """
     return restGetServiceTypes(baseUrl)
 
@@ -181,3 +153,10 @@ def restGetServiceByType(baseUrl: str, serviceType: str) -> list:
     else:
         print("Error or unexpected data returned:", services)
         return []
+
+
+def getServiceByType(baseUrl, serviceType):
+    """
+    synonym for restGetServiceByType
+    """
+    return restGetServiceByType(baseUrl,serviceType)
