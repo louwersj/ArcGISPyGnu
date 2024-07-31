@@ -161,10 +161,10 @@ list: A list of service names that match the specified service type. Each item i
 Fetching Services by Type  - fetch all services of type `MapServer`:
 ```Python
 services = restGetServiceByType("http://example.com/arcgis/rest/services", "MapServer")
-print(services)  # Output: ["SampleWorldCities/MapServer", "World/MapServer"]
+print(services)  # Output: ["SampleWorldCities", "World"]
 ```
 Fetching Services by Type  - fetch all services of type `FeatureServer`
 ```python
 services = restGetServiceByType("http://example.com/arcgis/rest/services", "FeatureServer")
-print(services)  # Output: ["USA/FeatureServer"]
+print(services)  # Output: ["USAData"]
 ```
