@@ -161,7 +161,8 @@ def getServiceByType(baseUrl, serviceType):
     """
     return restGetServiceByType(baseUrl,serviceType)
 
-def fetchFolderContent(baseUrl, folderName):
+
+def restGetFolderContent(baseUrl, folderName):
     """
     Fetches the content of a specified folder from an ArcGIS REST API endpoint.
 
@@ -173,9 +174,12 @@ def fetchFolderContent(baseUrl, folderName):
         dict: A dictionary containing the folder's services and subfolders.
     """
     try:
+        # Validate the base URL
+        validatedUrl = checkBaseUrl(baseUrl)
+
         # Ensure the folderName does not start with a slash
         cleanedFolderName = folderName.lstrip('/')
-        folderUrl = f"{baseUrl}/services/{cleanedFolderName}?f=json"
+        folderUrl = f"{validatedUrl}/services/{cleanedFolderName}?f=json"
         response = requests.get(folderUrl)
         response.raise_for_status()
         return response.json()
@@ -183,7 +187,8 @@ def fetchFolderContent(baseUrl, folderName):
         print(f"An error occurred while fetching folder content for {folderName}: {e}")
         return None
 
-def createTreeStructure(baseUrl):
+
+def restGetTreeStructure(baseUrl):
     """
     Creates a tree structure of the ArcGIS REST API folders and services.
 
@@ -222,7 +227,7 @@ def createTreeStructure(baseUrl):
 
         for subfolder in folderData.get("folders", []):
             subfolderPath = f"{currentPath}/{subfolder}".lstrip('/')
-            subfolderData = fetchFolderContent(validatedUrl, subfolderPath)
+            subfolderData = restGetFolderContent(validatedUrl, subfolderPath)
             if subfolderData:
                 result["folders"].append(buildTree(subfolderData, f"/{subfolderPath}"))
 
