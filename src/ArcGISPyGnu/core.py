@@ -41,16 +41,35 @@ def restGetFolders(baseUrl):
     Returns:
         list: A list of folder names, or a message indicating the folders are not available.
     """
+
     # Validate the base URL using the checkBaseUrl function from utils
     validatedUrl = checkBaseUrl(baseUrl)
 
     try:
-        response = requests.get(f"{validatedUrl}?f=json")
-        response.raise_for_status()
-        data = response.json()
-        return data.get("folders", "Folders information not available.")
-    except requests.RequestException as e:
-        return f"An error occurred: {e}"
+        # Get the complete tree structure
+        treeStructure = restGetTreeStructure(validatedUrl)
+
+        # Extract folder names from the tree structure
+        folders = []
+
+        def extractFolders(folderData):
+            """
+            Recursively extract folder names from the tree structure.
+
+            Args:
+                folderData (dict): The JSON data of the current folder.
+
+            """
+            for folder in folderData.get("folders", []):
+                folders.append(folder["name"])
+                extractFolders(folder)  # Recurse into subfolders
+
+        extractFolders(treeStructure)
+
+        return folders if folders else "Folders information not available."
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "Folders information not available."
 
 
 def getFolders(baseUrl):
