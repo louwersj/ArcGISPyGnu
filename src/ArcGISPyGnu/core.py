@@ -87,17 +87,34 @@ def restGetServices(baseUrl):
         baseUrl (str): The base URL of the ArcGIS REST API.
 
     Returns:
-        list: A list of service names, or a message indicating the services are not available.
+        list: A list of service dictionaries, or a message indicating the services are not available.
     """
+
     # Validate the base URL using the checkBaseUrl function from utils
     validatedUrl = checkBaseUrl(baseUrl)
 
     try:
-        response = requests.get(f"{validatedUrl}?f=json")
-        response.raise_for_status()
-        data = response.json()
-        return data.get("services", "Services information not available.")
-    except requests.RequestException as e:
+        # Get the complete tree structure
+        treeStructure = restGetTreeStructure(validatedUrl)
+
+        # Extract services from the tree structure
+        services = []
+
+        def extractServices(folderData):
+            """
+            Recursively extract service information from the tree structure.
+
+            Args:
+                folderData (dict): The JSON data of the current folder.
+            """
+            services.extend(folderData.get("services", []))
+            for folder in folderData.get("folders", []):
+                extractServices(folder)  # Recurse into subfolders
+
+        extractServices(treeStructure)
+
+        return services if services else "Services information not available."
+    except Exception as e:
         return f"An error occurred: {e}"
 
 
