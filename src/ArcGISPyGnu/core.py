@@ -160,3 +160,75 @@ def getServiceByType(baseUrl, serviceType):
     synonym for restGetServiceByType
     """
     return restGetServiceByType(baseUrl,serviceType)
+
+def fetchFolderContent(baseUrl, folderName):
+    """
+    Fetches the content of a specified folder from an ArcGIS REST API endpoint.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        folderName (str): The name of the folder to fetch the content from.
+
+    Returns:
+        dict: A dictionary containing the folder's services and subfolders.
+    """
+    try:
+        # Ensure the folderName does not start with a slash
+        cleanedFolderName = folderName.lstrip('/')
+        folderUrl = f"{baseUrl}/services/{cleanedFolderName}?f=json"
+        response = requests.get(folderUrl)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        print(f"An error occurred while fetching folder content for {folderName}: {e}")
+        return None
+
+def createTreeStructure(baseUrl):
+    """
+    Creates a tree structure of the ArcGIS REST API folders and services.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+
+    Returns:
+        dict: A JSON-like dictionary representing the tree structure of the folders and services.
+    """
+    validatedUrl = checkBaseUrl(baseUrl)
+
+    try:
+        response = requests.get(f"{validatedUrl}/services?f=json")
+        response.raise_for_status()
+        rootData = response.json()
+    except requests.RequestException as e:
+        print(f"An error occurred while fetching the base URL content: {e}")
+        sys.exit(1)
+
+    def buildTree(folderData, currentPath):
+        """
+        Recursively builds the tree structure for each folder.
+
+        Args:
+            folderData (dict): The JSON data of the current folder.
+            currentPath (str): The current folder path in the API.
+
+        Returns:
+            dict: A dictionary representing the folder and its contents.
+        """
+        result = {
+            "name": currentPath,
+            "services": folderData.get("services", []),
+            "folders": []
+        }
+
+        for subfolder in folderData.get("folders", []):
+            subfolderPath = f"{currentPath}/{subfolder}".lstrip('/')
+            subfolderData = fetchFolderContent(validatedUrl, subfolderPath)
+            if subfolderData:
+                result["folders"].append(buildTree(subfolderData, f"/{subfolderPath}"))
+
+        return result
+
+    # Start building the tree structure from the root data with the root name as "/"
+    treeStructure = buildTree(rootData, "/")
+
+    return treeStructure

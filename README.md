@@ -1,6 +1,8 @@
 # ArcGISPyGnu
 
-ArcGISPyGnu is a Python library for interacting with ArcGIS REST APIs. 
+ArcGISPyGnu is a Python library for interacting with ArcGIS REST APIs. The current version iof ArcGISPyGnu is intended 
+to be used against public (anonymous) access API endpoints and due to this no authentication has bene build into the 
+library. For those who need this feel free to add the functionality and share back to the project. 
 
 
 When trying to test the functionality of this Python library without having direct access to a test environment you could
