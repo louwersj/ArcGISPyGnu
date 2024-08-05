@@ -1,5 +1,5 @@
 import requests
-from .utils import checkBaseUrl
+from .utils import checkBaseUrl, printError
 
 def restGetVersion(baseUrl):
     """
@@ -273,3 +273,40 @@ def restGetTreeStructure(baseUrl):
     treeStructure = buildTree(rootData, "/")
 
     return treeStructure
+
+
+def restGetMapServerDetails(baseUrl, serviceName):
+    """
+    Fetches the details of a MapServer service from an ArcGIS REST API endpoint.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the MapServer service.
+
+    Returns:
+        dict: The JSON details of the MapServer service, or an error message if the request fails.
+    """
+    try:
+        # Validate the base URL
+        validatedUrl = checkBaseUrl(baseUrl)
+
+        # Construct the service URL
+        serviceUrl = f"{validatedUrl}/services/{serviceName}/MapServer?f=pjson"
+
+        # Make the request to fetch the service details
+        response = requests.get(serviceUrl)
+
+        # Handle specific HTTP errors
+        if response.status_code in {400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416,
+                                    417, 500, 501, 502, 503, 504, 505}:
+            printError(f"httpError{response.status_code}", serviceUrl)
+        else:
+            # Raise an HTTPError for other status codes
+            response.raise_for_status()
+
+        # If no errors, return the JSON response
+        return response.json()
+
+    except requests.RequestException as e:
+        error_message = f"An error occurred while fetching the MapServer details for {serviceName}: {e}"
+        printError("requestException", error_message)
