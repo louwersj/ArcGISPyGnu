@@ -1,6 +1,7 @@
 import requests
 from .utils import checkBaseUrl, printError
 
+
 def restGetVersion(baseUrl):
     """
     Fetches the version information from an ArcGIS REST API endpoint.
@@ -136,7 +137,8 @@ def restGetServiceTypes(baseUrl: str) -> list:
         baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 
     Returns:
-        list: A distinct list of service types found in the API response. If no types are found, an empty list is returned.
+        list: A distinct list of service types found in the API response. If no types are found, an empty list is
+        returned.
     """
     services = restGetServices(baseUrl)
 
@@ -167,7 +169,8 @@ def restGetServiceByType(baseUrl: str, serviceType: str) -> list:
         serviceType (str): The type of services to filter by (e.g., "MapServer", "FeatureServer").
 
     Returns:
-        list: A list of service names that match the specified service type. If no services match, an empty list is returned.
+        list: A list of service names that match the specified service type. If no services match, an empty list is
+        returned.
     """
     # Validate the base URL using the checkBaseUrl function from utils
     validatedUrl = checkBaseUrl(baseUrl)
@@ -223,11 +226,13 @@ def restGetFolderContent(baseUrl, folderName):
         print(f"An error occurred while fetching folder content for {folderName}: {e}")
         return None
 
+
 def getFolderContent(baseUrl, folderName):
     """
     synonym for restGetFolderContent
     """
     return restGetFolderContent(baseUrl, folderName)
+
 
 def restGetTreeStructure(baseUrl):
     """
@@ -280,6 +285,7 @@ def restGetTreeStructure(baseUrl):
 
     return treeStructure
 
+
 def getTreeStructure(baseUrl):
     """
     synonym for restGetTreeStructure
@@ -323,8 +329,9 @@ def restGetMapServerDetails(baseUrl, serviceName):
         error_message = f"An error occurred while fetching the MapServer details for {serviceName}: {e}"
         printError("requestException", error_message)
 
+
 def getMapServerDetails(baseUrl, serviceName):
     """
     synonym for restGetMapServerDetails
     """
-    return restGetMapServerDetails(baseUrl, serviceName):
+    return restGetMapServerDetails(baseUrl, serviceName)
