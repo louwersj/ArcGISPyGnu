@@ -223,6 +223,11 @@ def restGetFolderContent(baseUrl, folderName):
         print(f"An error occurred while fetching folder content for {folderName}: {e}")
         return None
 
+def getFolderContent(baseUrl, folderName):
+    """
+    synonym for restGetFolderContent
+    """
+    return restGetFolderContent(baseUrl, folderName)
 
 def restGetTreeStructure(baseUrl):
     """
@@ -243,6 +248,7 @@ def restGetTreeStructure(baseUrl):
     except requests.RequestException as e:
         print(f"An error occurred while fetching the base URL content: {e}")
         sys.exit(1)
+
 
     def buildTree(folderData, currentPath):
         """
@@ -273,6 +279,12 @@ def restGetTreeStructure(baseUrl):
     treeStructure = buildTree(rootData, "/")
 
     return treeStructure
+
+def getTreeStructure(baseUrl):
+    """
+    synonym for restGetTreeStructure
+    """
+    return restGetTreeStructure(baseUrl)
 
 
 def restGetMapServerDetails(baseUrl, serviceName):
@@ -310,3 +322,9 @@ def restGetMapServerDetails(baseUrl, serviceName):
     except requests.RequestException as e:
         error_message = f"An error occurred while fetching the MapServer details for {serviceName}: {e}"
         printError("requestException", error_message)
+
+def getMapServerDetails(baseUrl, serviceName):
+    """
+    synonym for restGetMapServerDetails
+    """
+    return restGetMapServerDetails(baseUrl, serviceName):
