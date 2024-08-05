@@ -29,6 +29,7 @@ pip install ArcGISPyGnu
 5. [restGetServices](#restgetServices)
 4. [getServices](#getServices)
 5. [restGetServiceByType](#restGetServiceByType)
+6. [restGetMapServerDetails](#restGetMapServerDetails)
 ---
 ### restGetVersion
 Fetches the version information from an ArcGIS REST API endpoint.
@@ -162,11 +163,45 @@ list: A list of service names that match the specified service type. Each item i
 #### Examples
 Fetching Services by Type  - fetch all services of type `MapServer`:
 ```Python
-services = restGetServiceByType("http://example.com/arcgis/rest/services", "MapServer")
+services = restGetServiceByType("http://example.com/arcgis/rest/", "MapServer")
 print(services)  # Output: ["SampleWorldCities", "World"]
 ```
 Fetching Services by Type  - fetch all services of type `FeatureServer`
 ```python
-services = restGetServiceByType("http://example.com/arcgis/rest/services", "FeatureServer")
+services = restGetServiceByType("http://example.com/arcgis/rest/", "FeatureServer")
 print(services)  # Output: ["USAData"]
 ```
+---
+
+### restGetMapServerDetails
+The restGetMapServerDetails function fetches the details of a MapServer service from an ArcGIS REST API endpoint. This function validates the base URL, constructs the appropriate service URL, makes an HTTP request to retrieve the MapServer details in JSON format, and handles various HTTP errors gracefully.
+
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* GetMapServerDetails
+
+#### Parameters:
+* baseUrl (str): The base URL of the ArcGIS REST API.
+* serviceName (str): The name of the MapServer service.
+
+#### Returns:
+dict: The JSON details of the MapServer service. If the request fails, it prints an error message and exits the program.
+
+#### Raises:
+SystemExit: If an HTTP error occurs or a request exception is raised, the program will print an error message and exit.
+
+#### Example Usage:
+```python 
+from core import restGetMapServerDetails
+
+# Example base URL and service name
+base_url = "https://example.com/arcgis/rest/"
+service_name = "MyMapService"
+
+# Fetch the MapServer details
+map_server_details = restGetMapServerDetails(base_url, service_name)
+
+# Print the MapServer details
+print(map_server_details)
+```
+
