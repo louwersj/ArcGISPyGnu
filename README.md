@@ -45,7 +45,7 @@ str: The version information of the ArcGIS REST API or a message indicating the 
 SystemExit: If the URL is not valid or contains a query string or fragment.
 Example
 ```python
-version = restGetVersion("http://example.com/arcgis/rest/")
+version = restGetVersion("https://sampleserver6.arcgisonline.com/arcgis/rest")
 print(version)  # Output: 10.91 (or a similar version number)
 ```
 ---
@@ -71,7 +71,7 @@ list: A list of folder names from the ArcGIS REST API or a message indicating th
 SystemExit: If the URL is not valid or contains a query string or fragment.
 #### Example
 ```python
-folders = restGetFolders("http://example.com/arcgis/rest/")
+folders = restGetFolders("https://sampleserver6.arcgisonline.com/arcgis/rest")
 print(folders)  # Output: ["AAA", "BBB", "CCC", "DDD"]
 ````
 ---
@@ -120,7 +120,7 @@ list: A list of dictionaries, each containing information about a service. Each 
 #### Examples
 Printing Service Names
 ```python
-services = getServices("http://example.com/arcgis/rest/")
+services = getServices("https://sampleserver6.arcgisonline.com/arcgis/rest")
 if isinstance(services, list):
     for service in services:
         if isinstance(service, dict) and "name" in service:
@@ -133,7 +133,7 @@ else:
 ```
 Printing Both Service Names and Types
 ```python
-services = getServices("http://example.com/arcgis/rest/")
+services = getServices("https://sampleserver6.arcgisonline.com/arcgis/rest")
 if isinstance(services, list):
     for service in services:
         if isinstance(service, dict) and "name" in service and "type" in service:
@@ -163,12 +163,12 @@ list: A list of service names that match the specified service type. Each item i
 #### Examples
 Fetching Services by Type  - fetch all services of type `MapServer`:
 ```Python
-services = restGetServiceByType("http://example.com/arcgis/rest/", "MapServer")
+services = restGetServiceByType("https://sampleserver6.arcgisonline.com/arcgis/rest", "MapServer")
 print(services)  # Output: ["SampleWorldCities", "World"]
 ```
 Fetching Services by Type  - fetch all services of type `FeatureServer`
 ```python
-services = restGetServiceByType("http://example.com/arcgis/rest/", "FeatureServer")
+services = restGetServiceByType("https://sampleserver6.arcgisonline.com/arcgis/rest", "FeatureServer")
 print(services)  # Output: ["USAData"]
 ```
 ---
@@ -195,7 +195,7 @@ SystemExit: If an HTTP error occurs or a request exception is raised, the progra
 from core import restGetMapServerDetails
 
 # Example base URL and service name
-base_url = "https://example.com/arcgis/rest/"
+base_url = "https://sampleserver6.arcgisonline.com/arcgis/rest"
 service_name = "MyMapService"
 
 # Fetch the MapServer details
