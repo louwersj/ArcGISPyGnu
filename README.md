@@ -204,4 +204,36 @@ map_server_details = restGetMapServerDetails(base_url, service_name)
 # Print the MapServer details
 print(map_server_details)
 ```
+----
 
+### restGetMapLayers
+Fetches the list of layers from a MapServer service and returns their names, IDs, and types.
+
+#### synonyms
+synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
+* getMapLayers
+
+#### Parameters
+* baseUrl (str): The base URL of the ArcGIS REST API.
+* serviceName (str): The name of the MapServer service.
+
+#### Returns
+list: A list of dictionaries containing layer names, IDs, and types, or an error message if the request fails.
+
+#### Example Usage
+```python
+# Example base URL and service name
+base_url = "https://gisextern.dictu.nl/arcgis/rest/"
+service_name = "Antenneregister/Antennes_extern"
+
+# Fetch the layers
+layers = restGetMapLayers(base_url, service_name)
+
+# Print the layers
+print(layers)
+```
+
+#### Error Handling
+If an error occurs during the request, an error message will be printed using the printError function, and the function will return None.
+
+----
