@@ -364,3 +364,10 @@ def restGetMapLayers(baseUrl, serviceName):
     except Exception as e:
         # Handle any exception that might occur
         printError("customError", f"Failed to fetch map layers: {e}")
+
+
+def getMapLayers(baseUrl, serviceName):
+    """
+    synonym for restGetMapServerDetails
+    """
+    return restGetMapLayers(baseUrl, serviceName)
