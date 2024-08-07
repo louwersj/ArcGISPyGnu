@@ -335,3 +335,32 @@ def getMapServerDetails(baseUrl, serviceName):
     synonym for restGetMapServerDetails
     """
     return restGetMapServerDetails(baseUrl, serviceName)
+
+
+def restGetMapLayers(baseUrl, serviceName):
+    """
+    Fetches the list of layers from a MapServer service and returns their names, IDs, and types.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the MapServer service.
+
+    Returns:
+        list: A list of dictionaries containing layer names, IDs, and types, or an error message if the request fails.
+    """
+    try:
+        # Get the MapServer details using restGetMapServerDetails
+        mapServerDetails = restGetMapServerDetails(baseUrl, serviceName)
+
+        # Extract layers information
+        layers = mapServerDetails.get('layers', [])
+
+        # Prepare the list of layers with their IDs, names, and types
+        layerList = [{'id': layer['id'], 'name': layer['name'], 'type': layer.get('type', 'Unknown')} for layer in
+                     layers]
+
+        return layerList
+
+    except Exception as e:
+        # Handle any exception that might occur
+        printError("customError", f"Failed to fetch map layers: {e}")
