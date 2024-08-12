@@ -198,7 +198,7 @@ def getServiceByType(baseUrl, serviceType):
     """
     synonym for restGetServiceByType
     """
-    return restGetServiceByType(baseUrl,serviceType)
+    return restGetServiceByType(baseUrl, serviceType)
 
 
 def restGetFolderContent(baseUrl, folderName):
@@ -253,7 +253,6 @@ def restGetTreeStructure(baseUrl):
     except requests.RequestException as e:
         print(f"An error occurred while fetching the base URL content: {e}")
         sys.exit(1)
-
 
     def buildTree(folderData, currentPath):
         """
@@ -446,7 +445,8 @@ def restGetServiceType(baseUrl, serviceName):
         serviceName (str): The name of the service to retrieve the type for.
 
     Returns:
-        str: The service type (e.g., MapServer, FeatureServer) if found, or a message indicating the service was not found.
+        str: The service type (e.g., MapServer, FeatureServer) if found, or a message indicating the service was not
+        found.
     """
     # Fetch all services using the restGetServices function
     services = restGetServices(baseUrl)
