@@ -371,3 +371,67 @@ def getMapLayers(baseUrl, serviceName):
     synonym for restGetMapServerDetails
     """
     return restGetMapLayers(baseUrl, serviceName)
+
+
+def restGetMapServerData(baseUrl, serviceName, layerId, where, outFields):
+    """
+    Fetches data from a specified map layer in an ArcGIS REST API service based on specific query parameters.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the service containing the layer.
+        layerId (int): The ID of the layer to query.
+        where (str): The SQL where clause to filter the data.
+        outFields (str): The fields to return.
+
+    Returns:
+        list: A list of features (dictionaries) containing the data from the layer.
+    """
+    # Validate the base URL
+    validatedUrl = checkBaseUrl(baseUrl)
+    queryUrl = f"{validatedUrl}/services/{serviceName}/MapServer/{layerId}/query"
+
+    # Parameters for the query
+    params = {
+        'where': where,
+        'outFields': outFields,
+        'f': 'json',
+        'returnGeometry': 'true',
+        'outSR': '4326',
+        'resultOffset': 0,
+        'resultRecordCount': 1000  # Adjust as needed based on the max record count
+    }
+
+    features = []
+    while True:
+        try:
+            response = requests.get(queryUrl, params=params)
+            response.raise_for_status()
+            data = response.json()
+            features.extend(data.get('features', []))
+            if len(data.get('features', [])) < params['resultRecordCount']:
+                break
+            params['resultOffset'] += params['resultRecordCount']
+        except requests.exceptions.HTTPError as e:
+            printError("httpError", e.response.status_code, queryUrl)
+            break
+        except requests.exceptions.RequestException as e:
+            printError("RequestException", str(e), queryUrl)
+            break
+
+    return features
+
+
+def restGetMapServerAllData(baseUrl, serviceName, layerId):
+    """
+    Fetches all data from a specified map layer in an ArcGIS REST API service.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the service containing the layer.
+        layerId (int): The ID of the layer to query.
+
+    Returns:
+        list: A list of features (dictionaries) containing all the data from the layer.
+    """
+    return restGetMapServerData(baseUrl, serviceName, layerId, where="1=1", outFields="*")
