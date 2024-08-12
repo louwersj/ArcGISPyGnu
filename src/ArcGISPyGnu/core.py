@@ -435,3 +435,25 @@ def restGetMapServerAllData(baseUrl, serviceName, layerId):
         list: A list of features (dictionaries) containing all the data from the layer.
     """
     return restGetMapServerData(baseUrl, serviceName, layerId, where="1=1", outFields="*")
+
+
+def restGetServiceType(baseUrl, serviceName):
+    """
+    Fetches the service type for a specific service name from an ArcGIS REST API.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the service to retrieve the type for.
+
+    Returns:
+        str: The service type (e.g., MapServer, FeatureServer) if found, or a message indicating the service was not found.
+    """
+    # Fetch all services using the restGetServices function
+    services = restGetServices(baseUrl)
+
+    # Iterate over the services to find the matching serviceName
+    for service in services:
+        if service.get('name') == serviceName:
+            return service.get('type', "Service type not available.")
+
+    return f"Service '{serviceName}' not found."
