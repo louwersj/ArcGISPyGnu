@@ -30,6 +30,8 @@ pip install ArcGISPyGnu
 4. [getServices](#getServices)
 5. [restGetServiceByType](#restGetServiceByType)
 6. [restGetMapServerDetails](#restGetMapServerDetails)
+7. [restGetMapServerData](restGetMapServerData)
+8. [restGetMapServerAllData](restGetMapServerAllData)
 ---
 ### restGetVersion
 Fetches the version information from an ArcGIS REST API endpoint.
@@ -37,7 +39,7 @@ Fetches the version information from an ArcGIS REST API endpoint.
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * getVersion
 
-#### parameters 
+#### Arguments 
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 #### Returns
 str: The version information of the ArcGIS REST API or a message indicating the version information is not available.
@@ -50,7 +52,7 @@ print(version)  # Output: 10.91 (or a similar version number)
 ```
 ---
 
-### restGetFolders
+### `restGetFolders`
 Fetches the list of folders from an ArcGIS REST API endpoint. Folders in the ArcGIS REST API are essential for 
 organizing and managing GIS resources. They help users categorize various services, maps, and data, facilitating easier 
 navigation and maintenance. By grouping related resources, folders not only streamline the user experience but also aid 
@@ -63,7 +65,7 @@ environment within the ArcGIS ecosystem.
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * getServices
 
-#### Parameters
+#### Arguments
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 #### Returns
 list: A list of folder names from the ArcGIS REST API or a message indicating the folders are not available.
@@ -76,7 +78,7 @@ print(folders)  # Output: ["AAA", "BBB", "CCC", "DDD"]
 ````
 ---
 
-### restGetServices
+### `restGetServices`
 Fetches the list of services from an ArcGIS REST API endpoint.
 In the ArcGIS REST API, service types are categorized to facilitate different types of geographic and spatial operations, each designed to meet specific business needs and applications. These service types include Map Services, Feature Services, Image Services, Geocode Services, and Network Analysis Services, among others.
 
@@ -96,7 +98,7 @@ Each service type within the ArcGIS REST API is designed to handle specific aspe
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * getServices
 
-#### Parameters
+#### Arguments
 baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment.
 ####Returns
 list: A list of dictionaries, each containing information about a service. Each dictionary has the following keys:
@@ -146,13 +148,13 @@ else:
 ```
 ---
 
-### restGetServiceByType
+### `restGetServiceByType`
 
 Fetches a list of service names from an ArcGIS REST API endpoint filtered by the specified service type.
 #### synonyms
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * getServiceByType
-#### Parameters
+#### Arguments
 * baseUrl (str): The base URL of the ArcGIS REST API. It should not contain a path, query string, or fragment. The checkBaseUrl function from utils.py is used to validate and standardize this URL.
 * serviceType (str): The type of services to filter by (e.g., "MapServer", "FeatureServer"). This parameter must be a string.
 #### Returns
@@ -173,14 +175,14 @@ print(services)  # Output: ["USAData"]
 ```
 ---
 
-### restGetMapServerDetails
+### `restGetMapServerDetails`
 The restGetMapServerDetails function fetches the details of a MapServer service from an ArcGIS REST API endpoint. This function validates the base URL, constructs the appropriate service URL, makes an HTTP request to retrieve the MapServer details in JSON format, and handles various HTTP errors gracefully.
 
 #### synonyms
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * GetMapServerDetails
 
-#### Parameters:
+#### Arguments:
 * baseUrl (str): The base URL of the ArcGIS REST API.
 * serviceName (str): The name of the MapServer service.
 
@@ -206,14 +208,14 @@ print(map_server_details)
 ```
 ----
 
-### restGetMapLayers
+### `restGetMapLayers`
 Fetches the list of layers from a MapServer service and returns their names, IDs, and types.
 
 #### synonyms
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
 * getMapLayers
 
-#### Parameters
+#### Arguments
 * baseUrl (str): The base URL of the ArcGIS REST API.
 * serviceName (str): The name of the MapServer service.
 
@@ -237,3 +239,203 @@ print(layers)
 If an error occurs during the request, an error message will be printed using the printError function, and the function will return None.
 
 ----
+
+### `restGetMapServerData`
+
+Fetches data from a specific layer of a MapServer in an ArcGIS REST API. This function first verifies that the service is a MapServer before proceeding with the data retrieval.
+
+#### arguments
+
+- **`baseUrl`** (`str`): The base URL of the ArcGIS REST API.
+  - Example: `https://sampleserver6.arcgisonline.com/arcgis/rest`
+
+- **`serviceName`** (`str`): The name of the service to query.
+  - Example: `YourServiceName`
+
+- **`layerId`** (`int`): The ID of the layer to query. Defaults to `0` if not specified.
+  - Example: `0`
+
+- **`where`** (`str`): The WHERE clause for filtering data. Defaults to `"1=1"` (no filtering).
+  - Example: `"1=1"`
+
+- **`outFields`** (`str`): The fields to include in the query. Defaults to `"*"` (all fields).
+  - Example: `"*"`
+
+#### Returns
+
+- **`dict`**: The JSON response containing the queried data or an error message.
+  - The JSON response typically includes attributes such as:
+    - `features`: A list of feature objects with geometry and attributes.
+    - `fields`: A list of field objects that describe the attributes.
+    - `objectIdFieldName`: The name of the field used as the unique identifier for each feature.
+    - `geometryType`: The type of geometry (e.g., Point, Polygon).
+  - Example response:
+    ```json
+    {
+      "features": [
+        {
+          "attributes": {
+            "OBJECTID": 1,
+            "Name": "Feature 1"
+          },
+          "geometry": {
+            "x": -117.1956,
+            "y": 34.0563
+          }
+        }
+      ],
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "type": "esriFieldTypeOID"
+        },
+        {
+          "name": "Name",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "objectIdFieldName": "OBJECTID",
+      "geometryType": "esriGeometryPoint"
+    }
+    ```
+
+#### Errors
+
+- **HTTP Errors**: Handles various HTTP errors by printing an error message.
+  - Example: `404` (Not Found) if the layer or service does not exist.
+- **Request Errors**: Handles request exceptions and prints an error message.
+- **Unexpected Errors**: Catches unexpected exceptions and prints an error message.
+
+#### Usage Example
+
+```python
+base_url = "https://sampleserver6.arcgisonline.com/arcgis/rest"
+service_name = "MyMapService"
+layer_id = 0
+
+# Fetch data from the specified layer
+data = restGetMapServerData(base_url, service_name, layer_id, where="1=1", outFields="*")
+
+# Print the data
+print(data)
+```
+---
+
+### `restGetMapServerAllData`
+
+Fetches all data from a specific layer of a MapServer in an ArcGIS REST API by calling `restGetMapServerData` with default parameters that retrieve all records and fields.
+
+#### Arguments
+
+- **`baseUrl`** (`str`): The base URL of the ArcGIS REST API.
+  - Example: `https://sampleserver6.arcgisonline.com/arcgis/rest`
+
+- **`serviceName`** (`str`): The name of the service to query.
+  - Example: `YourServiceName`
+
+- **`layerId`** (`int`): The ID of the layer to query. Defaults to `0` if not specified.
+  - Example: `0`
+
+#### Returns
+
+- **`dict`**: The JSON response containing the queried data or an error message.
+  - The JSON response typically includes attributes such as:
+    - `features`: A list of feature objects with geometry and attributes.
+    - `fields`: A list of field objects that describe the attributes.
+    - `objectIdFieldName`: The name of the field used as the unique identifier for each feature.
+    - `geometryType`: The type of geometry (e.g., Point, Polygon).
+  - Example response:
+    ```json
+    {
+      "features": [
+        {
+          "attributes": {
+            "OBJECTID": 1,
+            "Name": "Feature 1"
+          },
+          "geometry": {
+            "x": -117.1956,
+            "y": 34.0563
+          }
+        }
+      ],
+      "fields": [
+        {
+          "name": "OBJECTID",
+          "type": "esriFieldTypeOID"
+        },
+        {
+          "name": "Name",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "objectIdFieldName": "OBJECTID",
+      "geometryType": "esriGeometryPoint"
+    }
+    ```
+
+#### Errors
+
+- **HTTP Errors**: Handles various HTTP errors by printing an error message.
+  - Example: `404` (Not Found) if the layer or service does not exist.
+- **Request Errors**: Handles request exceptions and prints an error message.
+- **Unexpected Errors**: Catches unexpected exceptions and prints an error message.
+
+#### Usage Example
+
+```python
+base_url = "https://sampleserver6.arcgisonline.com/arcgis/rest"
+service_name = "MyMapService"
+layer_id = 0
+
+# Fetch all data from the specified layer with default parameters
+all_data = restGetMapServerAllData(base_url, service_name, layer_id)
+
+# Print the data
+print(all_data)
+```
+---
+
+### `restGetServiceType`
+
+Fetches the type of a specified service in an ArcGIS REST API by querying the service endpoint to determine if it is a MapServer or another type of service.
+
+#### Arguments
+
+- **`baseUrl`** (`str`): The base URL of the ArcGIS REST API.
+  - Example: `https://sampleserver6.arcgisonline.com/arcgis/rest`
+
+- **`serviceName`** (`str`): The name of the service to query.
+  - Example: `MyMapService`
+
+#### Returns
+
+- **`str`**: The type of the service.
+  - Common service types include:
+    - `"MapServer"`: Indicates a MapServer service.
+    - `"FeatureServer"`: Indicates a FeatureServer service.
+    - `"ImageServer"`: Indicates an ImageServer service.
+    - `"GeocodeServer"`: Indicates a GeocodeServer service.
+  - Example return value: `"MapServer"`
+
+#### Errors
+
+- **HTTP Errors**: Handles various HTTP errors by printing an error message.
+  - Example: `404` (Not Found) if the service does not exist.
+- **Request Errors**: Handles request exceptions and prints an error message.
+- **Unexpected Errors**: Catches unexpected exceptions and prints an error message.
+
+#### Usage Example
+
+```python
+base_url = "https://sampleserver6.arcgisonline.com/arcgis/rest"
+service_name = "MyMapService"
+
+# Fetch the type of the specified service
+service_type = restGetServiceType(base_url, service_name)
+
+# Print the service type
+print(f"Service Type: {service_type}")
+```
+---
+
