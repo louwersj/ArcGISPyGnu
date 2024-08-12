@@ -1,16 +1,24 @@
 # ArcGISPyGnu
 
-ArcGISPyGnu is a Python library for interacting with ArcGIS REST APIs. The current version iof ArcGISPyGnu is intended 
-to be used against public (anonymous) access API endpoints and due to this no authentication has bene build into the 
-library. For those who need this feel free to add the functionality and share back to the project. 
+ArcGISPyGnu is a Python library designed to facilitate interaction with the ArcGIS REST APIs, specifically targeting public (anonymous) access endpoints. This means that it allows users to access and query ArcGIS services that do not require authentication.
 
+ArcGISPyGnu provides a streamlined approach to working with public ArcGIS REST API endpoints using Python. Its focus on anonymous access makes it a useful tool for interacting with publicly available ArcGIS services. However, for users needing authenticated access, the library’s extensibility allows for community contributions to integrate these features, supporting a broader range of use cases.
+
+### Key Features
+* Public API Access: The library is tailored for use with public ArcGIS REST API endpoints, which are available without needing user authentication. This is particularly useful for applications or scripts that need to retrieve data or perform operations on ArcGIS services that are open to the public. 
+* No Built-in Authentication: As the current version of ArcGISPyGnu is designed for public endpoints, it does not include built-in support for authentication mechanisms. This design choice aligns with its focus on public access but limits its use with secured or private ArcGIS services that require login credentials. 
+* Extensible for Authentication: While the library does not support authentication out-of-the-box, it is open for extension. Users who require authentication features are encouraged to enhance the library by adding this functionality. Contributions to this effect can be shared back with the project, promoting community-driven improvements and collaborative development.
+
+### Usage
+Given that ArcGISPyGnu is aimed at public API endpoints, users can utilize it to perform various tasks such as querying spatial data, retrieving map services, or accessing other public resources offered by ArcGIS. Typical use cases might include fetching data layers, exploring public map services, or conducting spatial analysis on open datasets.
+
+### Contribution and Development
+Since the library currently lacks authentication features, developers interested in using it with private or authenticated services are invited to contribute to its development. Enhancements such as OAuth support, token-based authentication, or other security mechanisms can be integrated by contributors. Sharing these improvements with the project benefits the wider community by expanding the library’s functionality and utility.
 
 When trying to test the functionality of this Python library without having direct access to a test environment you could
 use https://sampleserver6.arcgisonline.com/arcgis/rest
 
----
-
-## Installation
+### Installation
 WARNING : we are curretly in the first stages of development and due to this we have not released ArcGISPyGnu to the wider Python community and you CANNOT install ArcGISPyGnu using pip/pip3 at this very moment. For those who like to be part of the development / test efforts you can manually fork the code from github and use it locally.   
 <!--
 You can install the package via pip:
@@ -19,6 +27,7 @@ You can install the package via pip:
 pip install ArcGISPyGnu
 ```
 -->
+
 ---
 
 ## Functionality overview 
