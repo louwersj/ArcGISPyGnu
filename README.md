@@ -33,7 +33,7 @@ pip install ArcGISPyGnu
 7. [restGetMapServerData](restGetMapServerData)
 8. [restGetMapServerAllData](restGetMapServerAllData)
 ---
-### restGetVersion
+### `restGetVersion`
 Fetches the version information from an ArcGIS REST API endpoint.
 #### synonyms
 synonyms are provided for Python functions to streamline their usage and enhance convenience. These shorter names serve as aliases for the original, longer function names, making it easier to write and read code. Despite the abbreviated form, the functionality, error handling, and performance remain consistent with the original functions. Users can rely on these synonyms to perform tasks with the same accuracy and reliability, ensuring a seamless coding experience while maintaining compatibility with the full range of features and support provided by ArcGISPyGnu.
