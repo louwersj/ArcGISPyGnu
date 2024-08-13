@@ -19,7 +19,7 @@ When trying to test the functionality of this Python library without having dire
 use https://sampleserver6.arcgisonline.com/arcgis/rest
 
 ### Installation
-WARNING : we are curretly in the first stages of development and due to this we have not released ArcGISPyGnu to the wider Python community and you CANNOT install ArcGISPyGnu using pip/pip3 at this very moment. For those who like to be part of the development / test efforts you can manually fork the code from github and use it locally.   
+WARNING : we are currently in the first stages of development and due to this we have not released ArcGISPyGnu to the wider Python community and you CANNOT install ArcGISPyGnu using pip/pip3 at this very moment. For those who like to be part of the development / test efforts you can manually fork the code from github and use it locally.   
 <!--
 You can install the package via pip:
 
@@ -32,15 +32,15 @@ pip install ArcGISPyGnu
 
 ## Functionality overview 
 1. [restGetVersion](#restGetVersion)
-2. [getVersion](#getVersion)
+2. [getVersion](#restGetVersion)
 3. [restGetFolders](#restGetFolders)
-4. [getFolders](#getFolders)
+4. [getFolders](#restGetFolders)
 5. [restGetServices](#restgetServices)
-4. [getServices](#getServices)
-5. [restGetServiceByType](#restGetServiceByType)
-6. [restGetMapServerDetails](#restGetMapServerDetails)
-7. [restGetMapServerData](restGetMapServerData)
-8. [restGetMapServerAllData](restGetMapServerAllData)
+6. [getServices](#restGetServices)
+7. [restGetServiceByType](#restGetServiceByType)
+8. [restGetMapServerDetails](#restGetMapServerDetails)
+9. [restGetMapServerData](restGetMapServerData)
+10. [restGetMapServerAllData](restGetMapServerAllData)
 ---
 ### `restGetVersion`
 Fetches the version information from an ArcGIS REST API endpoint.
@@ -114,7 +114,7 @@ list: A list of dictionaries, each containing information about a service. Each 
 * name (str): The name of the service.
 * type (str): The type of the service (e.g., MapServer, FeatureServer).
 
-* Example raw retrun
+* Example raw return
 ```json
 [
  {
