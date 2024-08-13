@@ -372,7 +372,7 @@ def getMapLayers(baseUrl, serviceName):
     return restGetMapLayers(baseUrl, serviceName)
 
 
-def restGetMapServerData(baseUrl, serviceName, layerId, where, outFields):
+def restGetMapLayerData(baseUrl, serviceName, layerId, where, outFields):
     """
     Fetches data from a specified map layer in an ArcGIS REST API service based on specific query parameters.
 
@@ -389,6 +389,11 @@ def restGetMapServerData(baseUrl, serviceName, layerId, where, outFields):
     # Validate the base URL
     validatedUrl = checkBaseUrl(baseUrl)
     queryUrl = f"{validatedUrl}/services/{serviceName}/MapServer/{layerId}/query"
+
+    # Verify if the service is of type MapServer
+    serviceType = restGetServiceType(baseUrl, serviceName)
+    if serviceType != "MapServer":
+        raise ValueError(f"The service {serviceName} is of type {serviceType}, not a MapServer.")
 
     # Parameters for the query
     params = {
@@ -421,7 +426,7 @@ def restGetMapServerData(baseUrl, serviceName, layerId, where, outFields):
     return features
 
 
-def restGetMapServerAllData(baseUrl, serviceName, layerId):
+def restGetMapLayerAllData(baseUrl, serviceName, layerId):
     """
     Fetches all data from a specified map layer in an ArcGIS REST API service.
 
@@ -433,7 +438,7 @@ def restGetMapServerAllData(baseUrl, serviceName, layerId):
     Returns:
         list: A list of features (dictionaries) containing all the data from the layer.
     """
-    return restGetMapServerData(baseUrl, serviceName, layerId, where="1=1", outFields="*")
+    return restGetMapLayerData(baseUrl, serviceName, layerId, where="1=1", outFields="*")
 
 
 def restGetServiceType(baseUrl, serviceName):

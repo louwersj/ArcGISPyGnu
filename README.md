@@ -39,8 +39,8 @@ pip install ArcGISPyGnu
 6. [getServices](#restGetServices)
 7. [restGetServiceByType](#restGetServiceByType)
 8. [restGetMapServerDetails](#restGetMapServerDetails)
-9. [restGetMapServerData](restGetMapServerData)
-10. [restGetMapServerAllData](restGetMapServerAllData)
+9. [restGetMapLayerData](restGetMapLayerData)
+10. [restGetMapLayerAllData](restGetMapLayerAllData)
 ---
 ### `restGetVersion`
 Fetches the version information from an ArcGIS REST API endpoint.
@@ -249,7 +249,7 @@ If an error occurs during the request, an error message will be printed using th
 
 ----
 
-### `restGetMapServerData`
+### `restGetMapLayerData`
 
 Fetches data from a specific layer of a MapServer in an ArcGIS REST API. This function first verifies that the service is a MapServer before proceeding with the data retrieval.
 
@@ -323,16 +323,16 @@ service_name = "MyMapService"
 layer_id = 0
 
 # Fetch data from the specified layer
-data = restGetMapServerData(base_url, service_name, layer_id, where="1=1", outFields="*")
+data = restGetMapLayerData(base_url, service_name, layer_id, where="1=1", outFields="*")
 
 # Print the data
 print(data)
 ```
 ---
 
-### `restGetMapServerAllData`
+### `restGetMapLayerAllData`
 
-Fetches all data from a specific layer of a MapServer in an ArcGIS REST API by calling `restGetMapServerData` with default parameters that retrieve all records and fields.
+Fetches all data from a specific layer of a MapServer in an ArcGIS REST API by calling `restGetMapLayerData` with default parameters that retrieve all records and fields.
 
 #### Arguments
 
@@ -398,7 +398,7 @@ service_name = "MyMapService"
 layer_id = 0
 
 # Fetch all data from the specified layer with default parameters
-all_data = restGetMapServerAllData(base_url, service_name, layer_id)
+all_data = restGetMapLayerAllData(base_url, service_name, layer_id)
 
 # Print the data
 print(all_data)
