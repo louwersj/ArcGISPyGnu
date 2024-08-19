@@ -426,6 +426,12 @@ def restGetMapLayerData(baseUrl, serviceName, layerId, where, outFields):
     return features
 
 
+def getMapLayerData(baseUrl, serviceName, layerId, where, outFields):
+    """
+    synonym for restGetMapLayerData
+    """
+    return restGetMapLayerData(baseUrl, serviceName, layerId, where, outFields)
+
 def restGetMapLayerAllData(baseUrl, serviceName, layerId):
     """
     Fetches all data from a specified map layer in an ArcGIS REST API service.
@@ -440,6 +446,12 @@ def restGetMapLayerAllData(baseUrl, serviceName, layerId):
     """
     return restGetMapLayerData(baseUrl, serviceName, layerId, where="1=1", outFields="*")
 
+
+def getMapLayerAllData(baseUrl, serviceName, layerId):
+    """
+    synonym for getMapLayerAllData
+    """
+    return restGetMapLayerAllData(baseUrl, serviceName, layerId)
 
 def restGetServiceType(baseUrl, serviceName):
     """
@@ -462,3 +474,44 @@ def restGetServiceType(baseUrl, serviceName):
             return service.get('type', "Service type not available.")
 
     return f"Service '{serviceName}' not found."
+
+def getServiceType(baseUrl, serviceName):
+    """
+    synonym for restGetServiceType
+    """
+    return restGetServiceType(baseUrl, serviceName)
+
+def restGetMapLayerDetails(baseUrl, serviceName, layerId):
+    """
+    Fetches details of a specific layer from a MapServer in an ArcGIS REST API.
+
+    Args:
+        baseUrl (str): The base URL of the ArcGIS REST API.
+        serviceName (str): The name of the service to query.
+        layerId (int): The ID of the layer to query.
+
+    Returns:
+        dict: JSON response from the MapServer containing the layer details, or None if an error occurred.
+    """
+    validatedUrl = checkBaseUrl(baseUrl)
+    serviceUrl = f"{validatedUrl}/services/{serviceName}/MapServer/{layerId}?f=pjson"
+
+    try:
+        response = requests.get(serviceUrl)
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.HTTPError as http_err:
+        printError("HTTPError", http_err.response.status_code, additionalInfo=serviceUrl)
+    except requests.exceptions.RequestException as req_err:
+        printError("RequestException", additionalInfo=str(req_err))
+    except Exception as e:
+        printError("Exception", additionalInfo=str(e))
+
+    return None
+
+def getMapLayerDetails(baseUrl, serviceName, layerId):
+    """
+    synonym for restGetMapLayerDetails
+    """
+    return restGetMapLayerDetails(baseUrl, serviceName, layerId)
